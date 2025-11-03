@@ -1,0 +1,27 @@
+From: Carlos Garnacho <carlosg@gnome.org>
+Date: Fri, 17 Jan 2025 08:52:17 +0100
+Subject: tests: Use full signature in function definition
+
+Somehow, gcc >=15 decides that we no longer can use unspecified
+arguments.
+
+(cherry picked from commit 9a19e8326bb018aca0d30055909a8bcc4bb20d57)
+
+Origin: 3.9.0
+---
+ tests/functional-tests/mockvolumemonitor/mock-drive.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tests/functional-tests/mockvolumemonitor/mock-drive.c b/tests/functional-tests/mockvolumemonitor/mock-drive.c
+index f7ab8c0..81c2a69 100644
+--- a/tests/functional-tests/mockvolumemonitor/mock-drive.c
++++ b/tests/functional-tests/mockvolumemonitor/mock-drive.c
+@@ -34,7 +34,7 @@ struct _MockDrive
+ 	const gchar *name;
+ };
+ 
+-static void mock_drive_drive_iface_init ();
++static void mock_drive_drive_iface_init (GDriveIface *iface);
+ 
+ G_DEFINE_TYPE_EXTENDED (MockDrive, mock_drive, G_TYPE_OBJECT, 0,
+ 	                      G_IMPLEMENT_INTERFACE (G_TYPE_DRIVE, mock_drive_drive_iface_init))

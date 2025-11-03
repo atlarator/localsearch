@@ -1,0 +1,34 @@
+From: Gayathri Berli <Gayathri.Berli@ibm.com>
+Date: Wed, 11 Dec 2024 17:55:34 +0100
+Subject: tracker-miners: Fix bmp-basic-1 test failures on big-endian.
+
+Make sure w,h values in get_img_resolution() respects endianness.
+
+Origin: https://gitlab.gnome.org/GNOME/localsearch/-/merge_requests/574
+---
+ src/tracker-extract/tracker-extract-bmp.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/src/tracker-extract/tracker-extract-bmp.c b/src/tracker-extract/tracker-extract-bmp.c
+index 2637fd4..e494823 100644
+--- a/src/tracker-extract/tracker-extract-bmp.c
++++ b/src/tracker-extract/tracker-extract-bmp.c
+@@ -23,6 +23,8 @@
+ 
+ #include <libtracker-miners-common/tracker-common.h>
+ #include <libtracker-extract/tracker-extract.h>
++#include <glib.h>
++#include <glib/gstdio.h>
+ 
+ static gboolean
+ get_img_resolution (const GFile *file,
+@@ -88,6 +90,9 @@ get_img_resolution (const GFile *file,
+ 		return FALSE;
+ 	}
+ 
++        w = GUINT32_FROM_LE(w);
++        h = GUINT32_FROM_LE(h);
++
+ 	if (width) {
+ 		*width = w;
+ 	}

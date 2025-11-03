@@ -1,0 +1,23 @@
+From: =?utf-8?q?Jeremy_B=C3=ADcha?= <jeremy.bicha@canonical.com>
+Date: Thu, 20 Feb 2025 10:50:31 -0500
+Subject: tests: decrease stall deadline
+
+to try to help build tests succeed on slower Debian build architectures
+like riscv64, hppa, sparc64
+---
+ tests/functional-tests/meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tests/functional-tests/meson.build b/tests/functional-tests/meson.build
+index cd74c15..597c97c 100644
+--- a/tests/functional-tests/meson.build
++++ b/tests/functional-tests/meson.build
+@@ -275,7 +275,7 @@ foreach t: misbehavior_tests
+   test_parts = t.split('/')
+   test_name = test_parts[1]
+   test_suite = test_parts[0]
+-  test_env.set('TRACKER_EXTRACT_DEADLINE', '5')
++  test_env.set('TRACKER_EXTRACT_DEADLINE', '3')
+   test(test_name, python,
+     args: [
+       meson.current_source_dir() / 'test_misbehavior_generic.py',

@@ -1,0 +1,26 @@
+From: =?utf-8?q?Jeremy_B=C3=ADcha?= <jeremy.bicha@canonical.com>
+Date: Thu, 2 May 2024 14:23:25 -0400
+Subject: tiff-photo-1.expected.json: Mark as XFAIL
+
+The test is newly run in 3.7.3, and seems to be buggy, see the upstream
+bug.
+
+Bug-Upstream: https://gitlab.gnome.org/GNOME/localsearch/-/issues/341
+---
+ .../data/extractor-content/images/tiff-photo-1.expected.json           | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/tests/functional-tests/data/extractor-content/images/tiff-photo-1.expected.json b/tests/functional-tests/data/extractor-content/images/tiff-photo-1.expected.json
+index c89b72c..e5083c7 100644
+--- a/tests/functional-tests/data/extractor-content/images/tiff-photo-1.expected.json
++++ b/tests/functional-tests/data/extractor-content/images/tiff-photo-1.expected.json
+@@ -1,7 +1,8 @@
+ {
+     "test": {
+         "Filename": "tiff-photo-1.tiff",
+-        "Comment": "TIFF Photograph example"
++        "Comment": "TIFF Photograph example",
++        "ExpectedFailure": true
+     },
+     "metadata": {
+         "@graph": [

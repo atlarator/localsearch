@@ -1,5 +1,770 @@
-template-repository (1.0-1) unstable; urgency=medium
+localsearch (3.8.2-8) unstable; urgency=high
 
-  * Initial release
+  * Rename localsearch binary package back to tracker-extract
+    to avoid upgrade issue with --purge. (Mitigates: #1113704)
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Wed, 24 Sep 2025 20:25:36 -0400
+
+localsearch (3.8.2-7) unstable; urgency=medium
+
+  * Cherry-pick 2 patches to fix build with gcc-15 (Closes: #1098013)
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Mon, 01 Sep 2025 05:22:58 -0400
+
+localsearch (3.8.2-6) unstable; urgency=medium
+
+  [ Simon McVittie ]
+  * d/control: Build-Depend on gobject-introspection, not libgirepository-1.0-dev
+
+  [ Jeremy Bícha ]
+  * Bump Standards Version to 4.7.2
+  * Remove obsolete Rules-Require-Root field
+  * Release to unstable
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Sun, 31 Aug 2025 15:46:21 -0400
+
+localsearch (3.8.2-5) experimental; urgency=medium
+
+  * Rename source package and primary binary package to match upstream rename
+    (Closes: #1072711)
+  * Convert the tracker-extract package to a transitional package
+  * Use Build-Depends: gir1.2-tracker-3.0 instead of libtracker-sparql-3.0-dev
+  * Cherry-pick patch to fix build with libxml 2.14 (Closes: #1106644)
+    (LP: #2111803)
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Tue, 12 Aug 2025 18:52:20 -0400
+
+tracker-miners (3.8.2-4) unstable; urgency=high
+
+  * Add Build-Depends: libtracker-sparql-3.0-dev for build tests
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Thu, 06 Mar 2025 16:04:38 -0500
+
+tracker-miners (3.8.2-3) unstable; urgency=medium
+
+  * Add patch to decrease stall test deadline to try to help tests
+    pass on slower Debian build architectures like riscv64
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Thu, 20 Feb 2025 11:10:09 -0500
+
+tracker-miners (3.8.2-2) unstable; urgency=medium
+
+  * Release to unstable
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Wed, 19 Feb 2025 20:41:12 -0500
+
+tracker-miners (3.8.2-1) experimental; urgency=medium
+
+  * New upstream release
+    - Project has been renamed to localsearch
+  * Keep using tracker-miners source package name and tracker-extract
+    binary package name to avoid NEW queue processing delay
+  * Add versioned provides for localsearch so that apps can use the new
+    name sooner in their Debian dependencies
+  * Convert tracker-miner-fs to a transitional package
+  * Add tracker-test-utils package, previously built by source package tracker
+  * Update Depends from tracker to tinysparql
+  * Remove obsolete Build-Depends: intltool, libblkid-dev
+  * Add Build-Depends: libgirepository-1.0-dev, libgudev-1.0-dev
+  * Update debian/copyright
+  * Bump Standards Version to 4.7.0
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Sat, 15 Feb 2025 09:35:20 -0500
+
+tracker-miners (3.7.4-1) unstable; urgency=medium
+
+  * New upstream release
+  * Cherry-pick a proposed patch to fix the bmp test on big endian
+    (Closes: #1064548)
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Wed, 11 Dec 2024 20:08:09 -0500
+
+tracker-miners (3.7.3-1) unstable; urgency=medium
+
+  * New upstream release (Closes: #1069409)
+  * Add patch to skip new broken tiff-photo test
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Thu, 02 May 2024 14:28:09 -0400
+
+tracker-miners (3.7.2-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Thu, 02 May 2024 08:33:30 -0400
+
+tracker-miners (3.7.1-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Wed, 27 Mar 2024 18:35:21 -0400
+
+tracker-miners (3.7.0-1) unstable; urgency=medium
+
+  * New upstream release (Closes: #1066898)
+  * salsa-ci.yml: Drop experimental handling
+  * Disable seccomp for build test build, similar to how we
+    disable landlock there
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Wed, 20 Mar 2024 11:27:30 -0400
+
+tracker-miners (3.7~rc-3) unstable; urgency=medium
+
+  * Release to unstable
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Fri, 08 Mar 2024 08:05:21 -0500
+
+tracker-miners (3.7~rc-2) experimental; urgency=medium
+
+  [ Patrice Duroux ]
+  * Update Homepage (Closes: #1064214)
+
+  [ Jeremy Bícha ]
+  * Use "images" for bmp-basic-1 big-endian test override
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Thu, 07 Mar 2024 09:41:04 -0500
+
+tracker-miners (3.7~rc-1) experimental; urgency=medium
+
+  * New upstream release
+  * Re-enable landlock feature
+  * Do an additional build without landlock for build tests only
+  * Skip bmp-basic-1 test on big-endian architectures:
+    it is a new test failing there
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Mon, 04 Mar 2024 19:31:14 -0500
+
+tracker-miners (3.7~beta-2) experimental; urgency=medium
+
+  * Temporarily disable landlock feature since it breaks build tests
+    on official Debian & Ubuntu builders
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Fri, 23 Feb 2024 18:56:28 -0500
+
+tracker-miners (3.7~beta-1) experimental; urgency=medium
+
+  [ Jeremy Bícha ]
+  * New upstream release
+  * Stop using debian/control.in and dh_gnome_clean
+  * Bump minimum tracker to 3.7
+  * Update install file
+  * Add debian/salsa-ci.yml
+
+  [ Laurent Bigonville ]
+  * debian/control: Switch from systemd to systemd-dev BD (Closes: #1060595)
+
+  [ Matthew Ruffell ]
+  * Purge stale systemd unit dependency symbolic links to remove
+    tracker-extract-3.service from default.target.wants. (LP: #1779890)
+    - d/tracker-extract.postinst
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Fri, 23 Feb 2024 17:44:58 -0500
+
+tracker-miners (3.6.0-1) experimental; urgency=medium
+
+  * New upstream release
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Mon, 18 Sep 2023 15:40:13 -0400
+
+tracker-miners (3.6~rc-1) experimental; urgency=medium
+
+  * New upstream release
+  * debian/control.in: Bump minimum tracker to 3.6
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Fri, 08 Sep 2023 11:39:07 -0400
+
+tracker-miners (3.5.2-1) experimental; urgency=medium
+
+  * New upstream release
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Mon, 15 May 2023 09:38:57 -0400
+
+tracker-miners (3.5.1-1) experimental; urgency=medium
+
+  * New upstream release
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Wed, 10 May 2023 16:35:29 -0400
+
+tracker-miners (3.5.0~beta-1) experimental; urgency=medium
+
+  * New upstream release
+  * debian/control.in: Bump minimum tracker to 3.5.0~
+  * debian/tracker-extract.install: Update
+  * Refresh patches
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Wed, 15 Feb 2023 10:46:22 -0500
+
+tracker-miners (3.4.6-3) unstable; urgency=medium
+
+  * Allow getsockopt in seccomp filter (Closes: #1057617)
+
+ -- Laurent Bigonville <bigon@debian.org>  Sun, 28 Jan 2024 12:04:38 +0100
+
+tracker-miners (3.4.6-2) unstable; urgency=medium
+
+  * Team upload
+
+  [ Matthew Ruffell ]
+  * Purge stale systemd unit dependency symbolic links to remove
+    tracker-extract-3.service from default.target.wants. (LP: #1779890)
+    - d/tracker-extract.postinst
+
+  [ Jeremy Bícha ]
+  * Stop using debian/control.in and dh_gnome_clean
+
+ -- Matthew Ruffell <matthew.ruffell@canonical.com>  Fri, 01 Dec 2023 13:49:34 +1300
+
+tracker-miners (3.4.6-1) unstable; urgency=medium
+
+  * New upstream release
+  * Drop patches applied in new release
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Tue, 31 Oct 2023 13:10:00 -0400
+
+tracker-miners (3.4.5-3) unstable; urgency=high
+
+  * Cherry-pick proposed patches to fix build on various architectures
+    (Closes: #1053238)
+  * Update changelog entry for 3.4.5-1 to acknowledge CVE fix
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Wed, 18 Oct 2023 10:37:25 -0400
+
+tracker-miners (3.4.5-2) unstable; urgency=high
+
+  * Cherry-pick build fixes
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Tue, 10 Oct 2023 07:49:05 -0400
+
+tracker-miners (3.4.5-1) unstable; urgency=high
+
+  * New upstream bugfix release
+    - Includes sandbox hardening to fix CVE-2023-5557 (Closes: #1053881)
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Thu, 28 Sep 2023 17:58:13 -0400
+
+tracker-miners (3.4.3-2) unstable; urgency=medium
+
+  [ Jeremy Bícha ]
+  * debian/gbp.conf: Branch for trixie
+  * Cherry-pick 2 patches to improve tracker systemd services
+    - Fix tracker-extract.service WantedBy target so that gvfsd has
+      access to KRB5CCNAME. Thanks Denison Barbosa (LP: #1779890)
+    - Don't start the daemons for non-root system users like gdm
+      and lightdm (LP: #2007755) (Closes: #981089)
+
+  [ Daniel van Vugt ]
+  * Add tracker-extract-Add-missing-break-to-remove-a-single.patch
+    to fix SIGSEGV in decorator_item_cache_remove (LP: #2012638)
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Mon, 21 Aug 2023 08:32:05 -0400
+
+tracker-miners (3.4.3-1) unstable; urgency=medium
+
+  * New upstream release
+  * Update standards version to 4.6.2, no changes needed
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Thu, 19 Jan 2023 13:34:32 -0500
+
+tracker-miners (3.4.2-1) unstable; urgency=medium
+
+  * New upstream release
+  * Drop 2 sandbox whitelist patches: applied in new release
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Tue, 06 Dec 2022 17:25:49 -0500
+
+tracker-miners (3.4.0-4) unstable; urgency=medium
+
+  * Cherry-pick patch to add epoll_create1 to the sandbox whitelist
+    to fix crash with glib 2.74+ (LP: #1990630)
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Mon, 17 Oct 2022 07:34:45 -0400
+
+tracker-miners (3.4.0-3) unstable; urgency=medium
+
+  * Use correct version of allow-get-set-mempolicy.patch
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Sat, 08 Oct 2022 08:59:52 -0400
+
+tracker-miners (3.4.0-2) unstable; urgency=medium
+
+  [ Nathan Pratta Teodosio ]
+  * Add d/p/allow-get-set-mempolicy.patch: Fixes build
+
+  [ Jeremy Bicha ]
+  * debian/control.in: Build-Depend on libblkid-dev
+
+ -- Nathan Pratta Teodosio <nathan.teodosio@canonical.com>  Thu, 06 Oct 2022 06:43:19 -0400
+
+tracker-miners (3.4.0-1) unstable; urgency=medium
+
+  * New upstream release
+  * debian/control.in: Bump Standards-Version to 4.6.1
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Mon, 19 Sep 2022 10:31:15 -0400
+
+tracker-miners (3.4.0~rc-1) unstable; urgency=medium
+
+  * New upstream release
+  * debian/control.in: Bump minimum tracker to 3.4.0~
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Wed, 07 Sep 2022 08:46:43 -0400
+
+tracker-miners (3.4.0~beta-2) unstable; urgency=medium
+
+  * Release to unstable
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Thu, 25 Aug 2022 04:50:38 -0400
+
+tracker-miners (3.4.0~beta-1) experimental; urgency=medium
+
+  * New upstream release
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Wed, 24 Aug 2022 10:59:46 -0400
+
+tracker-miners (3.3.1-2) unstable; urgency=high
+
+  * Release to unstable
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Wed, 03 Aug 2022 08:44:35 -0400
+
+tracker-miners (3.3.1-1) experimental; urgency=medium
+
+  * New upstream release
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Wed, 15 Jun 2022 12:31:32 -0400
+
+tracker-miners (3.3.0-1) experimental; urgency=medium
+
+  * New upstream release
+  * Drop sandbox patch: applied in new release
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Mon, 21 Mar 2022 12:20:25 -0400
+
+tracker-miners (3.3.0~rc-1) experimental; urgency=medium
+
+  * New upstream release
+  * debian/control.in: Build-Depend on asciidoc-base instead of asciidoc
+  * debian/control.in: Bump minimum gstreamer to 1.20.0
+  * Cherry-pick patch to fix sandbox crash issue (LP: #1962585)
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Wed, 16 Mar 2022 11:58:22 -0400
+
+tracker-miners (3.3.0~beta-1) experimental; urgency=medium
+
+  * New upstream release
+  * Drop syscall patches: applied in new release
+  * debian/control.in: Bump minimum tracker to 3.3.0~
+
+ -- Jeremy Bicha <jeremy.bicha@canonical.com>  Thu, 24 Feb 2022 14:00:02 -0500
+
+tracker-miners (3.1.3-4) unstable; urgency=medium
+
+  * Cherry-pick 2 more commits to allow more syscalls through the sandbox
+
+ -- Jeremy Bicha <jeremy.bicha@canonical.com>  Tue, 15 Feb 2022 21:07:25 -0500
+
+tracker-miners (3.1.3-3) unstable; urgency=medium
+
+  * Cherry-pick commit to fix arm64 build test
+
+ -- Jeremy Bicha <jeremy.bicha@canonical.com>  Tue, 15 Feb 2022 20:40:50 -0500
+
+tracker-miners (3.1.3-2) unstable; urgency=medium
+
+  [ Laurent Bigonville ]
+  * Drop d/p/build-Bring-back-missing-rpath-on-tracker-control-ex.patch, fixed
+    upstream in an other way
+  * debian/control.in: Add gstreamer1.0-tools to the BD, needed for tests
+  * debian/rules: Drop unknown "docs" option (Closes: #997535)
+
+ -- Jeremy Bicha <jeremy.bicha@canonical.com>  Tue, 15 Feb 2022 09:56:47 -0500
+
+tracker-miners (3.1.3-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Jeremy Bicha <jbicha@debian.org>  Sun, 19 Sep 2021 12:59:49 -0400
+
+tracker-miners (3.1.2-2) unstable; urgency=medium
+
+  * debian/rules: Completely disable the tests if nocheck option is used
+  * Fix the RPATH for the tracker-miner-fs-control-3 executable.
+    Drop Laney's patch that set it for the extract modules, this is not
+    needed anymore as the executable loading them has the RPATH set
+
+ -- Laurent Bigonville <bigon@debian.org>  Fri, 17 Sep 2021 10:46:52 +0200
+
+tracker-miners (3.1.2-1) unstable; urgency=medium
+
+  [ Jeremy Bicha ]
+  * New upstream release
+  * Drop an rpath and seccomp patches: applied in new release
+  * debian/rules: Drop obsolete delete rule
+
+  [ Laurent Bigonville ]
+  * Explicitly disable NetworkManager support on non-linux architectures
+  * Remove obsolete xdg autostart files (Closes: #993884, #993883)
+  * debian/rules: Search for the private libraries in the private path
+  * Cleanup old systemd .service files too
+  * Drop pre-Buster upgrade paths
+
+ -- Laurent Bigonville <bigon@debian.org>  Thu, 16 Sep 2021 15:17:48 +0200
+
+tracker-miners (3.1.1-4) unstable; urgency=medium
+
+  [ Laurent Bigonville ]
+  * debian/control.in: Only BD against libnm-dev on linux-any architectures
+
+  [ Jeremy Bicha ]
+  * debian/control.in: Have tracker-miner-fs Break older versions of apps
+    since the gsettings schema & dbus path changed names (Closes: #993430)
+
+ -- Jeremy Bicha <jbicha@debian.org>  Wed, 01 Sep 2021 18:48:53 -0400
+
+tracker-miners (3.1.1-3) unstable; urgency=medium
+
+  * Release to unstable
+
+ -- Jeremy Bicha <jbicha@debian.org>  Mon, 30 Aug 2021 22:49:52 -0400
+
+tracker-miners (3.1.1-2) experimental; urgency=medium
+
+  * Cherry-pick seccomp-Allow-64bit-time-functions-on-32bit-systems.patch
+
+ -- Jeremy Bicha <jbicha@debian.org>  Thu, 26 Aug 2021 18:37:12 -0400
+
+tracker-miners (3.1.1-1) experimental; urgency=medium
+
+  * New upstream release.
+  * Update patches:
+    - build-Fix-Dautostart-true.patch,
+      functional-tests-Check-for-IPCT-image-tags-only-if-libipt.patch,
+      tests-Use-meson-test-suites-to-group-tests.patch,
+      prefer_systemd_activation.patch,
+      dont_start_for_root.patch,
+      Don-t-immediately-restart-tracker-extract-on-SIGSYS.patch: Drop,
+      upstream or not needed with 3.0.
+    - Revert-build-Include-libdir-in-rpath.patch: Refresh.
+  * Update build-deps, build flags and install paths for 3.0.
+  * psx-game-image-1.expected.json-Mark-as-XFAIL.patch: Mark test as XFAIL.
+    It's newly run in 3.0, and fails - seems buggy somehow upstream.
+  * rules:
+    - Use default build flags, strip Bsymbolic-functions-
+      We get
+        Bail out! GLib-GObject-FATAL-WARNING: cannot register existing type
+        'TrackerTaskPool'
+      otherwise.
+    - Don't run testsuites in parallel, they can interfere
+  * Drop-file-notifier-and-miner-fs-tests.patch: Drop 'file-notifier' and
+    'miner-fs' tests. There are flakiness problems here. See:
+    https://gitlab.gnome.org/GNOME/tracker-miners/-/issues/174
+  * Bump to compat 13:
+      - Update dh_auto_test override:
+        + No need to check for 'nocheck' now.
+        + No need to set $HOME and $XDG_RUNTIME_DIR any more
+        + Call `dh_auto_test` instead of overriding it to call `meson test`
+          - this is what `dh_auto_test` calls for us in compat 13.
+      - Remove `dh_missing --fail-missing` override as this is the default
+        now.
+  * control: Set Rules-Requires-Root to no as we do not require root for
+    building/testing tracker-miners.
+  * tracker-extract-meson.build-Set-RPATH-for-the-extract-mod.patch: Add. Set
+    RPATH for the extract modules, so they can find.
+    libtracker-extract.so in the pkglibdir.
+  * shlibs.local: Add libtracker-miner-3.0.
+  * debian/copyright: Update with `scan-copyright`, thanks
+
+ -- Iain Lane <laney@debian.org>  Wed, 23 Jun 2021 17:03:07 +0100
+
+tracker-miners (2.3.5-2) unstable; urgency=medium
+
+  * Make the 'audio' tests non-fatal on powerpc and sparc64 as well
+
+ -- Laurent Bigonville <bigon@debian.org>  Fri, 09 Oct 2020 11:13:36 +0200
+
+tracker-miners (2.3.5-1) unstable; urgency=medium
+
+  [ Simon McVittie ]
+  * debian/watch: Only match tracker-2.
+    tracker-3 will need packaging separately (see #964376).
+  * New upstream release
+    - Remove generic gstreamer-based image extraction codepath
+    - Allow statx in seccomp filter, used by newer GLib (Closes: #970589)
+    - Set a deadline of 30 seconds for extraction tasks
+    - Several fixes to libav-based extractor
+  * d/rules: Enable autostart option to preserve existing functionality
+  * Add patch from upstream to fix build
+  * Build-Depend on systemd (on Linux), for systemd.pc
+  * Refresh patch series with closest-to-upstream patches first
+
+ -- Laurent Bigonville <bigon@debian.org>  Thu, 08 Oct 2020 16:22:33 +0200
+
+tracker-miners (2.3.3-2) unstable; urgency=medium
+
+  * d/p/prefer_systemd_activation.patch: Updated to use the version merged
+    upstream.  The services will now be started by the systemd default.target
+    and only for non-root user
+
+ -- Laurent Bigonville <bigon@debian.org>  Sat, 04 Apr 2020 18:54:17 +0200
+
+tracker-miners (2.3.3-1) unstable; urgency=medium
+
+  [ Olivier Tilloy ]
+  * New upstream release
+  * debian/patches/upstream-scheduler-settings-fix.patch: removed, upstream
+
+  [ Debian Janitor ]
+  * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository,
+    Repository-Browse.
+
+  [ Laurent Bigonville ]
+  * debian/control.in: Bump Standards-Version to 4.5.0 (no further changes)
+  * Build-depends on libseccomp-dev on linux-riscv64 now that's available
+    (Closes: #952410)
+  * debian/patches/prefer_systemd_activation.patch: Prefer systemd activation
+    over XDG autostart
+
+ -- Laurent Bigonville <bigon@debian.org>  Mon, 16 Mar 2020 12:19:35 +0100
+
+tracker-miners (2.3.2-1) unstable; urgency=medium
+
+  [ Laurent Bigonville ]
+  * debian/patches/no-seccomp-riscv64.patch: Fix FTBFS on riscv64 architecture
+    by not requiring libseccomp
+  * Bump debhelper compatibility to 12
+  * Move the daemons to /usr/libexec now that this is allowed in the debian
+    policy
+  * debian/control.in: Bump Standards-Version to 4.4.1 (no further changes)
+
+  [ Olivier Tilloy ]
+  * New upstream release
+  * debian/patches/upstream-scheduler-settings-fix.patch: cherry-pick an
+    upstream patch that fixes https://gitlab.gnome.org/GNOME/tracker/issues/180
+
+ -- Olivier Tilloy <olivier.tilloy@canonical.com>  Tue, 03 Mar 2020 12:00:55 +0100
+
+tracker-miners (2.3.1-3) unstable; urgency=medium
+
+  * debian/rules: Fix architectures list for libseccomp-dev build-dependency
+
+ -- Laurent Bigonville <bigon@debian.org>  Sat, 18 Jan 2020 22:39:59 +0100
+
+tracker-miners (2.3.1-2) unstable; urgency=medium
+
+  [ Andreas Henriksson ]
+  * Drop superfluous build-deps on python and python-gi
+    - already switched to python3 in tracker-miners 2.3 (Closes: #945717)
+
+  [ Laurent Bigonville ]
+  * debian/tracker-miner-fs.maintscript: Remove
+    /etc/xdg/autostart/tracker-miner-apps.desktop on upgrade
+
+ -- Laurent Bigonville <bigon@debian.org>  Sat, 30 Nov 2019 13:31:09 +0100
+
+tracker-miners (2.3.1-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Andreas Henriksson <andreas@fatal.se>  Fri, 25 Oct 2019 12:14:34 +0200
+
+tracker-miners (2.3.0-1) experimental; urgency=medium
+
+  * New upstream release:
+    - The ~/Downloads folder is now indexed non-recursively by default.
+      + This reduces the risk of Tracker unnecessarily crawling large
+        directories of source code or video game data.
+      + If users are storing data such as music or photos in subfolders of the
+        Downloads folder, they will need to move it to an appropriate place
+        (~/Music, ~/Pictures, etc.) so that it is still indexed.
+    - Fixes in Musicbrainz metadata extraction
+  * d/p/tests-Use-meson-test-suites-to-group-tests.patch:
+    - Group tests by suites so that we can easily select them
+  * debian/rules:
+    - Run functional tests without failing
+    - Disable audio tests in some architectures
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Thu, 19 Sep 2019 10:15:43 +0100
+
+tracker-miners (2.2.99.0-1) experimental; urgency=medium
+
+  [ Marco Trevisan (Treviño) ]
+  * New upstream release
+    + Support for reading Musicbrainz metadata from audio files.
+    + Tracker Writeback now uses GStreamer to write metadata to audio files,
+      instead of depending on taglib directly.
+    + Directories will now be ignored if they contain a file named `.nomedia`.
+      A file named `.trackerignore` has the same effect, but the `.nomedia` file
+      brings us in line with Android.
+    + Removed obsolete 'max-media-art-width' setting.
+    + Multiple leak fixes
+    + Functional tests now use python3
+    + Fix text extractor handling of non-existent files
+    + Fix indexing of tracks in FLAC files
+  * debian/control:
+    - BD on meson 0.47
+    - Use gstreamer instead of libtagc for parsing audio tags
+    - BD on python3-gi in case we're running tests
+    - BD on gstreamer1.0-plugins-good and gstreamer1.0-libav
+  * debian/rules: Set XDG_RUNTIME_DIR on tests
+  * d/p/functional-tests-Check-for-ISO-image-tags-only-if-libosin.patch:
+    - Only check for ISO image tags if libosinfo is found (disabled in Ubuntu)
+  * debian/tracker-extract.install: Remove miners-common
+  * tracker-miner-fs.install: Remove tracker-miner-apps
+  * debian/docs: Use README.md
+
+  [ Iain Lane ]
+  * debian/rules: Don't run dh_auto_test if nocheck is set in
+    DEB_BUILD_OPTIONS
+  * Revert "build: Include libdir in rpath" This reverts commit
+    6a9199a86a7047aa3d5db8d0faba8a5ae1e10bf4. We don't want these in rpath on
+    Debian; the standard libdir is in the search path.
+
+ -- Iain Lane <laney@debian.org>  Tue, 03 Sep 2019 17:50:30 +0100
+
+tracker-miners (2.1.6-1) unstable; urgency=medium
+
+  * New upstream release
+  * debian/rules: Set meson's auto_features=enabled
+  * Drop obsolete Build-Depends on valac
+  * Drop patches applied in new release:
+    - meson-Fix-bad-string-comparisons-in-create-miner-symlinks.patch
+    - meson-fix-bashism-in-equality-check.patch
+  * Cherry-pick Stop-merging-translations-to-gschema-files.patch:
+    - Fix translations of gsettings descriptions. (Closes: #918122)
+
+ -- Jeremy Bicha <jbicha@debian.org>  Sat, 23 Feb 2019 12:15:14 -0500
+
+tracker-miners (2.1.5-4) unstable; urgency=medium
+
+  * Add -Wl,-O1 to our LDFLAGS
+  * Bump Standards-Version to 4.3.0
+
+ -- Jeremy Bicha <jbicha@debian.org>  Thu, 27 Dec 2018 18:01:40 -0500
+
+tracker-miners (2.1.5-3) unstable; urgency=medium
+
+  * Drop autopkgtest since those tests are already run by dh_auto_test
+  * Drop unnecessary Build-Depends on bash (it's essential)
+
+ -- Jeremy Bicha <jbicha@debian.org>  Mon, 26 Nov 2018 12:15:17 -0500
+
+tracker-miners (2.1.5-2) unstable; urgency=medium
+
+  * Cherry-pick 2 patches to fix bashisms in meson build script
+  * Cherry-pick functional-tests-Require-Bash-for-test-runner.patch:
+    - Set the functional test script shebang to bash since it's
+      too much work to make it work with other shells right now
+  * Build with meson
+  * Drop enca from Build-Depends; upstream recommends icu for this feature
+  * Build-Depend on tracker & libdbus-1-dev
+  * Build-Depend on dbus-x11 for dbus-launch for functional tests
+  * Build-Depend on bash & procps for functional tests
+
+ -- Jeremy Bicha <jbicha@debian.org>  Tue, 20 Nov 2018 20:05:52 -0500
+
+tracker-miners (2.1.5-1) unstable; urgency=medium
+
+  [ Tim Lunn ]
+  * New upstream release
+
+  [ Jeremy Bicha ]
+  * Cherry-pick libtracker-miners-common-Make-g_error-a-soft-error.patch
+    - Allow tracker library to still be used without ontology rules
+    (Closes: #908800)
+
+ -- Jeremy Bicha <jbicha@debian.org>  Mon, 12 Nov 2018 16:52:52 -0500
+
+tracker-miners (2.1.4-2) unstable; urgency=medium
+
+  * Release to unstable (LP: #1791484)
+
+ -- Jeremy Bicha <jbicha@debian.org>  Wed, 12 Sep 2018 22:39:03 -0400
+
+tracker-miners (2.1.4-1) experimental; urgency=medium
+
+  * New upstream development release
+  * debian/control.in: Bump Build-deps on Tracker 2.1.0
+  * d/p/Don-t-immediately-restart-tracker-extract-on-SIGSYS.patch: Refreshed
+
+ -- Tim Lunn <tim@feathertop.org>  Wed, 05 Sep 2018 21:04:51 +1000
+
+tracker-miners (2.0.4-3) unstable; urgency=medium
+
+  * Team upload
+  * Build-depend on shared-mime-info if running tests (Closes: #907896)
+
+ -- Simon McVittie <smcv@debian.org>  Mon, 10 Sep 2018 18:03:26 +0100
+
+tracker-miners (2.0.4-2) unstable; urgency=medium
+
+  * Disable enca, libiptcdata, and libosinfo on Ubuntu since they
+    are in 'universe'
+  * Bump Standards-Version to 4.1.4
+
+ -- Jeremy Bicha <jbicha@debian.org>  Sat, 12 May 2018 18:59:12 -0400
+
+tracker-miners (2.0.4-1) unstable; urgency=medium
+
+  [ Jeremy Bicha ]
+  * Update Vcs fields for migration to https://salsa.debian.org/
+  * Bump debhelper compat to 11
+
+  [ Michael Biebl ]
+  * New upstream version 2.0.4
+  * Enable GExiv2-based extractor module for RAW files
+  * Move /etc/sysctl.d/30-tracker.conf to /usr/lib/sysctl.d
+  * Don't generate shlibs file for private libtracker-extract
+  * Remove obsolete /etc/xdg/autostart/tracker-miner-user-guides.desktop
+    (Closes: #883671)
+
+ -- Michael Biebl <biebl@debian.org>  Sun, 25 Feb 2018 16:59:42 +0100
+
+tracker-miners (2.0.3-1) unstable; urgency=medium
+
+  * New upstream version 2.0.3
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 15 Nov 2017 01:41:34 +0100
+
+tracker-miners (2.0.2-1) unstable; urgency=medium
+
+  * New upstream version 2.0.2
+  * Bump Standards-Version to 4.1.1
+
+ -- Jeremy Bicha <jbicha@debian.org>  Thu, 05 Oct 2017 21:08:45 -0400
+
+tracker-miners (2.0.1-1) unstable; urgency=medium
+
+  * New upstream version 2.0.1
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 04 Oct 2017 23:07:58 +0200
+
+tracker-miners (2.0.0-3) unstable; urgency=medium
+
+  * Move package from collab-maint to pkg-gnome
+
+ -- Michael Biebl <biebl@debian.org>  Thu, 14 Sep 2017 22:10:47 +0200
+
+tracker-miners (2.0.0-2) unstable; urgency=medium
+
+  * Release to unstable
+
+ -- Jeremy Bicha <jbicha@debian.org>  Wed, 13 Sep 2017 13:13:45 -0400
+
+tracker-miners (2.0.0-1) experimental; urgency=medium
+
+  * New upstream version 2.0.0
+  * Drop obsolete libunistring-dev Build-Depends
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 12 Sep 2017 14:09:58 +0200
+
+tracker-miners (1.99.3-1) experimental; urgency=medium
+
+  [ Jeremy Bicha ]
+  * Initial release (Closes: #871738)
+
+  [ Michael Biebl ]
+  * Trim down unnecessary Build-Depends
+  * Switch to new dh_missing helper
+  * Switch to --fail-missing
+  * Set Debian GNOME team as Maintainer
+
+ -- Jeremy Bicha <jbicha@debian.org>  Thu, 07 Sep 2017 20:19:23 -0400

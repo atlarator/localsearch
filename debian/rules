@@ -1,4 +1,69 @@
 #!/usr/bin/make -f
 
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export DEB_LDFLAGS_MAINT_STRIP = -Wl,-Bsymbolic-functions
+
+FEATURE_FLAGS = \
+	-Dgeneric_media_extractor=gstreamer \
+	-Dsystemd_user_services=/usr/lib/systemd/user \
+	-Dfunctional_tests=true \
+	-Dminer_rss=false \
+	-Dbattery_detection=upower \
+	-Dcharset_detection=icu \
+	-Dsystemd_user_services=true \
+	-Dsystemd_user_services_dir=/usr/lib/systemd/user/
+
+ifneq (linux,$(DEB_HOST_ARCH_OS))
+FEATURE_FLAGS += -Dnetwork_manager=disabled
+endif
+
+MESON_TEST_ARGS = \
+	--no-rebuild \
+	--verbose
+TEST_SUITES_FILTER = \
+	functional
+# https://gitlab.gnome.org/GNOME/tracker-miners/-/issues/309
+# https://gitlab.gnome.org/GNOME/tracker-miners/-/issues/318
+ifeq ($(DEB_HOST_ARCH),$(findstring $(DEB_HOST_ARCH),hppa powerpc ppc64 s390x sparc64))
+TEST_SUITES_FILTER += \
+	audio
+endif
+
+# Disable 'universe' dependencies (libosinfo & libiptcdata) on Ubuntu
+ifeq ($(shell dpkg-vendor --query vendor),Ubuntu)
+FEATURE_FLAGS += \
+	-Diptc=disabled \
+	-Diso=disabled
+endif
+
 %:
 	dh $@
+
+override_dh_auto_configure:
+	dh_auto_configure  -- \
+		-Dauto_features=enabled \
+		$(FEATURE_FLAGS)
+	dh_auto_configure --builddirectory=debian/testtmp -- \
+		-Dauto_features=enabled \
+		-Dlandlock=disabled \
+		-Dseccomp=false \
+		$(FEATURE_FLAGS)
+
+execute_after_dh_auto_build:
+	dh_auto_build --builddirectory=debian/testtmp
+
+override_dh_makeshlibs:
+	dh_makeshlibs -X/usr/lib/$(DEB_HOST_MULTIARCH)/localsearch-3.0/
+
+override_dh_shlibdeps:
+	dh_shlibdeps -Ltracker-extract
+
+override_dh_auto_test:
+	dbus-run-session -- \
+		dh_auto_test --builddirectory=debian/testtmp --no-parallel -- \
+		$(MESON_TEST_ARGS) $(addprefix --no-suite ,${TEST_SUITES_FILTER})
+	-dbus-run-session -- \
+		dh_auto_test --builddirectory=debian/testtmp --no-parallel -- \
+		$(MESON_TEST_ARGS) $(addprefix --suite ,${TEST_SUITES_FILTER})
+
+override_dh_gnome_clean:

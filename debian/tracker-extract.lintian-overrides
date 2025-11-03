@@ -1,0 +1,2 @@
+# The rpath is used to load the private libraries in /usr/lib/*/localsearch-3.0
+custom-library-search-path RUNPATH /usr/lib/*/localsearch-3.0 [usr/libexec/localsearch-*3]

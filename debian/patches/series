@@ -1,0 +1,8 @@
+Drop-file-notifier-and-miner-fs-tests.patch
+psx-game-image-1.expected.json-Mark-as-XFAIL.patch
+tiff-photo-1.expected.json-Mark-as-XFAIL.patch
+tracker-miners-Fix-bmp-basic-1-test-failures-on-big-endia.patch
+tests-decrease-deadline.patch
+extract-html-Don-t-assume-a-NUL-terminated-string-for-the.patch
+tests-Use-full-signature-in-function-definition.patch
+common-Cast-function-argument-to-expected-type.patch
